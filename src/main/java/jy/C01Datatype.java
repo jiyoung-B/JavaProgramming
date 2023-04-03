@@ -63,7 +63,7 @@ public class C01Datatype {
         System.out.printf("a: %d, b: %d", a, b);
         System.out.printf("\n\"Java    Program\"\n");
 
-        // ex) 성적 처리프로그램
+        // ex) 성적 처리프로그램 v1
         // 이름, 국어, 영어, 수학을 초기화시켜서
         // 총점, 평균을 계산한 뒤 결과 출력
 
