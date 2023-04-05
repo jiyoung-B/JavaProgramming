@@ -183,5 +183,16 @@ public class EX05 {
 
         System.out.println(result);
 
+        // Q34 - CalcurateFee
+        // 거리 대비 배송료 계산
+        System.out.print("거리는? ");
+        int dist = sc.nextInt();
+
+        if (dist >= 300) result = "75000원";
+        else if (dist >= 100) result = "55000원";
+        else if (dist >= 50) result = "18000원";
+        else result = "10000원";
+
+        System.out.println(result);
     }
 }
