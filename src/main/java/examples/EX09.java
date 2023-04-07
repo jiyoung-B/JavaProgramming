@@ -1,18 +1,109 @@
 package examples;
 
+import java.util.StringJoiner;
+
 public class EX09 {
     public static void main(String[] args) {
-        EmployeesVO emp = new EmployeesVO(100, "Steven", "King", "SKING@go.kr","0108456", "2022-06-25", "24000", 56,5.5,8674,984);
-        DepartmentsVO dept = new DepartmentsVO(10, "Administration", 200, 1700);
+        // board 테이블에 대응하는 클래스 작성
+        Board b = new Board(1,"테스트", "abc123",
+                "2023-04-07", 0, "테스트입니다");
+
+        System.out.println(b);
+
+        // employees, departments 테이블에 대응하는 클래스 작성
+        EmployeesVO emp = new EmployeesVO(100, "Steven", "King",
+                "SKING", "515.123.4567", "2003-06-17", "AD_PRES",
+                24000, 0, 0, 90);
+
         System.out.println(emp);
 
+        DepartmentsVO dept = new DepartmentsVO(
+                10, "Administration",
+                200, 1700);
+
         System.out.println(dept);
+
+    }
+}
+
+class Board {
+    private int bno;
+    private String title;
+    private String userid;
+    private String regdate;
+    private int views;
+    private String contents;
+
+    public Board() {
+    }
+
+    public Board(int bno, String title, String userid, String regdate, int views, String contents) {
+        this.bno = bno;
+        this.title = title;
+        this.userid = userid;
+        this.regdate = regdate;
+        this.views = views;
+        this.contents = contents;
+    }
+
+    public int getBno() {
+        return bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getRegdate() {
+        return regdate;
+    }
+
+    public void setRegdate(String regdate) {
+        this.regdate = regdate;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    @Override
+    public String toString() {
+        String fmt = "%d %s %s %s %d %s\n";
+        return String.format(fmt, bno, title, userid,
+                regdate, views, contents);
     }
 
 }
 
 class EmployeesVO {
-
     private int employeeid;
     private String firstname;
     private String lastname;
@@ -132,11 +223,14 @@ class EmployeesVO {
 
     @Override
     public String toString() {
-        String fmt = "%d %s %s %s %s %s %s %d %.2f %d %d \n";
-        return String.format(fmt, employeeid, firstname, lastname, email, phonenumber, hiredate, jobid, salary, commisionpct, managerid, departmentid);
+        String fmt = "%d %s %s %s %s %s %s %d %.2f %d %d\n";
+        return String.format(fmt, employeeid, firstname, lastname,
+                email, phonenumber, hiredate, jobid, salary, commisionpct,
+                managerid, departmentid);
     }
 }
-class DepartmentsVO{
+
+class DepartmentsVO {
     private int departmentid;
     private String departmentname;
     private int managerid;
@@ -152,9 +246,42 @@ class DepartmentsVO{
         this.locationid = locationid;
     }
 
+    public int getDepartmentid() {
+        return departmentid;
+    }
+
+    public void setDepartmentid(int departmentid) {
+        this.departmentid = departmentid;
+    }
+
+    public String getDepartmentname() {
+        return departmentname;
+    }
+
+    public void setDepartmentname(String departmentname) {
+        this.departmentname = departmentname;
+    }
+
+    public int getManagerid() {
+        return managerid;
+    }
+
+    public void setManagerid(int managerid) {
+        this.managerid = managerid;
+    }
+
+    public int getLocationid() {
+        return locationid;
+    }
+
+    public void setLocationid(int locationid) {
+        this.locationid = locationid;
+    }
+
     @Override
     public String toString() {
         String fmt = "%d %s %d %d\n";
-        return String.format(fmt, departmentid, departmentname, managerid, locationid);
+        return String.format(fmt, departmentid, departmentname,
+                managerid, locationid);
     }
 }
