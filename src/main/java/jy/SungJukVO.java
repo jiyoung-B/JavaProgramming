@@ -1,26 +1,21 @@
 package jy;
-
 public class SungJukVO {
-
     private String name;
-    private int kors;
-    private int engs;
-    private int mats;
-    private int tots;
-    private double avgs;
-    private char grds;
+    private int kor;
+    private int eng;
+    private int mat;
+    private int tot;
+    private double avg;
+    private char grd;
 
     public SungJukVO() {
     }
 
-    public SungJukVO(String name, int kors, int engs, int mats, int tots, double avgs, char grds) {
+    public SungJukVO(String name, int kor, int eng, int mat) {
         this.name = name;
-        this.kors = kors;
-        this.engs = engs;
-        this.mats = mats;
-        this.tots = tots;
-        this.avgs = avgs;
-        this.grds = grds;
+        this.kor = kor;
+        this.eng = eng;
+        this.mat = mat;
     }
 
     public String getName() {
@@ -31,64 +26,57 @@ public class SungJukVO {
         this.name = name;
     }
 
-    public int getKors() {
-        return kors;
+    public int getKor() {
+        return kor;
     }
 
-    public void setKors(int kors) {
-        this.kors = kors;
+    public void setKor(int kor) {
+        this.kor = kor;
     }
 
-    public int getEngs() {
-        return engs;
+    public int getEng() {
+        return eng;
     }
 
-    public void setEngs(int engs) {
-        this.engs = engs;
+    public void setEng(int eng) {
+        this.eng = eng;
     }
 
-    public int getMats() {
-        return mats;
+    public int getMat() {
+        return mat;
     }
 
-    public void setMats(int mats) {
-        this.mats = mats;
+    public void setMat(int mat) {
+        this.mat = mat;
     }
 
-    public int getTots() {
-        return tots;
+    public int getTot() {
+        return tot;
     }
 
-    public void setTots(int tots) {
-        this.tots = tots;
+    public void setTot(int tot) {
+        this.tot = tot;
     }
 
-    public double getAvgs() {
-        return avgs;
+    public double getAvg() {
+        return avg;
     }
 
-    public void setAvgs(double avgs) {
-        this.avgs = avgs;
+    public void setAvg(double avg) {
+        this.avg = avg;
     }
 
-    public char getGrds() {
-        return grds;
+    public char getGrd() {
+        return grd;
     }
 
-    public void setGrds(char grds) {
-        this.grds = grds;
+    public void setGrd(char grd) {
+        this.grd = grd;
     }
 
     @Override
     public String toString() {
-        return "SungJukVO{" +
-                "name='" + name + '\'' +
-                ", kors=" + kors +
-                ", engs=" + engs +
-                ", mats=" + mats +
-                ", tots=" + tots +
-                ", avgs=" + avgs +
-                ", grds=" + grds +
-                '}';
+        String fmt = "%s %d %d %d %d %.1f %s\n";
+        return String.format(fmt, name, kor, eng, mat, tot, avg, grd);
     }
 }

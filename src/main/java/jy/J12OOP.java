@@ -1,6 +1,12 @@
 package jy;
 
 public class J12OOP {
+    // 클래스 종류
+    // VO/DTO : ValueObject, Data Transfer Object
+    // 계층간 데이터교환을 위한 자바빈즈를 의미
+    // 값만 저장하기 위해 생성하는 클래스
+    // 주로 데이터베이스 테이블의 각 열과 연계해서 작성
+
     public static void main(String[] args) {
         Person2 p1 = new Person2();
 

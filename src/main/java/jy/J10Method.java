@@ -1,5 +1,6 @@
 package jy;
 
+import javax.security.sasl.SaslClient;
 import java.util.Scanner;
 
 public class J10Method {
@@ -29,7 +30,7 @@ public class J10Method {
         System.out.println( showStarPyramid(7) );
         System.out.println( showStarPyramid(3) );
 
-        // ex) 성적 처리 프로그램 v4
+        // ex) 성적 처리프로그램 v4
         String[] names = new String[3];
         int[] kors = new int[3];
         int[] engs = new int[3];
@@ -38,45 +39,14 @@ public class J10Method {
         int[] tots = new int[3];
         double[] avgs = new double[3];
         char[] grds = new char[3];
-//
-//        readSungJuk(names, kors, engs, mats);
-//        computeSungJuk(kors, engs, mats, tots, avgs, grds);
-//        printSungJuk(names, kors, engs, mats, tots, avgs, grds);
 
-        // 만일, 2과목이 추가된다면?
+        readSungJuk(names,kors,engs,mats);
+        computeSungJuk(kors,engs,mats, tots,avgs,grds);
+        printSungJuk(names,kors,engs,mats, tots,avgs,grds);
+
+        // 만일, 2 과목이 추가된다면?
         // 메소드 호출부 수정, 메서드 선언부 수정
         // 과목 입력 수정, 성적처리 수정, 성적 출력 수정
-
-
-        class Person{
-            String name;
-            String job;
-            int age;
-            char gender;
-
-            public Person(){}// 기본생성자
-
-           public Person(String name, String job, int age, char gender) {
-                this.name = name;
-                this.job = job;
-                this.age = age;
-                this.gender = gender;
-            }// 매개변수 있는 생성자
-        }
-
-        //Person p1 = new Person();
-        Person p1 = new Person("지현", "배우", 32, '여');
-//        p1.name = "혜교";
-//        p1.job = "학생";
-//        p1.age = 35;
-//        p1.gender = '여';
-
-        System.out.println(p1.name);
-        System.out.println(p1.job);
-        System.out.println(p1.age);
-        System.out.println(p1.gender);
-
-
 
     }
 
@@ -135,11 +105,14 @@ public class J10Method {
     }
 
     // ex) 성적 처리프로그램 v4
-    // 3명의 학생에 대해 이름, 국어, 영어, 수학을 입력받아 총점, 평균, 학점을 계산한 뒤 결과 출력
+    // 3명의 학생에 대해 이름, 국어, 영어, 수학을 입력받아
+    // 총점, 평균, 학점을 계산한 뒤 결과 출력
     // 학점은 수우미양가 중 하나가 출력되도록 함
     // 단, 메서드로 기능을 모듈화 시켜 작성
 
-    public static void readSungJuk(String[] names, int[] kors, int[] engs, int[] mats){
+    public static void readSungJuk(
+            String[] names, int[] kors, int[] engs, int[] mats) {
+
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < names.length; i++) {
             System.out.print((i + 1) + "번 학생 이름은? ");
@@ -153,7 +126,10 @@ public class J10Method {
         } // 성적 데이터 입력
     }
 
-    public static void computeSungJuk(int[] kors, int[] engs, int[] mats, int[] tots, double[] avgs, char[] grds){
+    public static void computeSungJuk(
+            int[] kors, int[] engs, int[] mats,
+            int[] tots, double[] avgs, char[] grds) {
+
         for (int i = 0; i < kors.length; i++) {
             tots[i] = kors[i] + engs[i] + mats[i];
             avgs[i] = tots[i] / 3;
@@ -166,10 +142,13 @@ public class J10Method {
                 case 6: grds[i] = '양'; break;
                 default: grds[i] = '가'; break;
             }
-        } // 성적처리
+        }
     }
 
-    public static void printSungJuk(String[] names, int[] kors, int[] engs, int[] mats, int[] tots, double[] avgs, char[] grds){
+    public static void printSungJuk(
+            String[] names, int[] kors, int[] engs, int[] mats,
+            int[] tots, double[] avgs, char[] grds) {
+
         String result = "";
         for (int i = 0; i < names.length; i++) {
             result += String.format("%s %d %d %d \n",
@@ -179,7 +158,7 @@ public class J10Method {
         } // 결과 출력 준비
 
         System.out.println(result);
-
     }
+
 
 }
