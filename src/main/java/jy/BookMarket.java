@@ -6,6 +6,7 @@ public class BookMarket {
     // BookMarket -> BookService, MemberService <- Book, Member
     public static void main(String[] args) {
         BookMarketService bksrv = new BookMarketService();
+        bksrv.registerMember(); // 회원등록
 
         while(true) {
             // bookmarket 메뉴 작성
