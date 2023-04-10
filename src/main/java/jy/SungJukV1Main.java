@@ -17,12 +17,12 @@ public class SungJukV1Main {
     public static void main(String[] args) {
         SungJukV1Service sjsrv = new SungJukV1Service();
 
-       // sjsrv.registerSungJuk();
+       // sjsrv.newSungJuk();
 
         while(true) {
             String menu = sjsrv.displayMenu();
             sjsrv.processMenu(menu);
-            //sjsrv.showSungJuks();
+            //sjsrv.readSungJuk();
         } // while
 
 
