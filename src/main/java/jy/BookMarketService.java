@@ -8,7 +8,8 @@ public class BookMarketService {
         sc = new Scanner(System.in);
     }
 
-    public String displayMenu(){   // bookmarket 메뉴 작성
+    // bookmarket 메뉴 작성
+    public String displayMenu(){
         StringBuilder sb = new StringBuilder();
         sb.append("---------------------------\n")
             .append("Welcome to Shopping Mall\n")
@@ -30,6 +31,7 @@ public class BookMarketService {
         return menu;
     }
 
+    // 메뉴 분기 처리
     public void processMenu(String menu){
         switch (menu) {
             case "1":
@@ -59,6 +61,6 @@ public class BookMarketService {
                 break; // 정상 종료
             default:
                 System.out.println("\n잘못 입력햐셨습니다!\n");
-        }
+        } // switch
     }
 }
