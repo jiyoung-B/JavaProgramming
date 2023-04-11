@@ -36,6 +36,20 @@ public class J18OOP {
         firebet.attack();
         firebet.useStimpack();
 
+        // 다형성 사용 - 인터페이스를 이용하면
+        // 구현관계에 있는 모든 클래스형으로 객체화 가능
+        Unit3Action unit = new SCV3();
+        unit.attack();
+        unit.move();
+        //scv2.collect(); // 사용불가! - Unit3Action에 정의 x
+
+        unit = new Marine3();
+        unit.attack();
+        unit.move();
+
+        // scv = new Marine3(); // scv는 Marine으로 변환 불가
+
+
     }
 }
 
