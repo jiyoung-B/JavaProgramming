@@ -48,6 +48,11 @@ public class J16OOP {
         medic1.useRestoration();
         medic1.useOpticalFlare();
 
+        // 한편, 부모클래스인 unit도 객체화 가능
+        Unit unit1 = new Unit();
+        System.out.println(unit1.life);
+        unit1.attack();
+
     }
 }
 
