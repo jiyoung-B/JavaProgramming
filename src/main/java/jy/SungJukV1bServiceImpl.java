@@ -65,7 +65,20 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
         }
     }
     public void modifySungJuk() {}
-    public void removeSungJuk() {}
+    public void removeSungJuk() {
+        // 이름입력 -> 대상검색 -> 대상출력
+        System.out.println("삭제할 학생이름?");
+        String name = sc.next();
+        for (int i = 0; i < sjs.length; i++) {
+            if(sjs[i] != null && sjs[i].getName().equals(name)){
+                sjs[i] = null;  // 삭제할 배열요소에 null을 대입
+                System.out.println("\n삭제되었습니다!\n");
+                break;
+            }
+
+        }
+
+    }
     public void readSungJuk(){
         String fmt = "%s %d %d %d\n";
         for (SungJukVO sj : sjs) {
