@@ -55,7 +55,50 @@ public class J16OOP {
 
     }
 }
+class SCV0 {
+    protected int life;   // 생명력
+    protected int power;  // 공격력
+    protected double move;   // 이동속도
+    protected int sight;  // 시야
+    protected int time;   // 생산소요시간
 
+    public SCV0() {
+        this.life = 60;
+        this.power = 5;
+        this.move = 2.344;
+        this.sight = 7;
+        this.time = 20;
+    }
+
+    protected void attack() {System.out.printf("융합 절단기(%d)으로 공격중...\n", power);}
+    protected void move() {System.out.printf("%.1f 속도로 이동중...\n", move);}
+    protected void collect() {System.out.println("미네랄이나 개스핀 가스를 캐는중...");}
+
+
+}
+class Marine0 {
+    protected int life;   // 생명력
+    protected int power;  // 공격력
+    protected double move;   // 이동속도
+    protected int sight;  // 시야
+    protected int time;   // 생산소요시간
+
+    public Marine0() {
+        this.life = 40;
+        this.power = 6;
+        this.move = 1.875;
+        this.sight = 7;
+        this.time = 24;
+    }
+
+    protected void attack() {System.out.printf("가우스 소총(%d)으로 공격중...\n", power);}
+    protected void move() {System.out.printf("%.1f 속도로 이동중...\n", move);}
+    protected void useStimpack(){System.out.printf("전투 자극제 사용 : 공격력 %.1f로 증가, 이동속도 %.1f로 증가\n", power*1.72, move*1.15);}
+
+
+}
+
+// ---------------------------------------
 class Unit {
     protected int life;   // 생명력
     protected int power;  // 공격력
