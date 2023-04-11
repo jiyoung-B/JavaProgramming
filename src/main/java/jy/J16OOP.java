@@ -18,15 +18,22 @@ public class J16OOP {
     // 하위클래스에서 같은 이름의 메서드로 다시 작성하는 것을 의미
     // 즉, 상속받은 메서드를 새로 정의해서 사용하는 것을 말함
 
+    // 클래스 형변환
+    // 다형성의 또 다른 예
+    // upcasting : 자식클래스가 부모클래스로 변환하는 것을 의미 (자동)
+    // downcasting : 부모클래스가 자식클래스로 변환하는 것을 의미 (수동)
+
     public static void main(String[] args) {
-        SCV scv1 = new SCV();
+        //SCV scv1 = new SCV();
+        Unit scv1 = new SCV(); // 다형성 : upcasting - scv -> unit
         Marine marine1 = new Marine();
         Firebet firebet1 = new Firebet();
         Medic medic1 = new Medic();
 
         System.out.println(scv1.life);
         scv1.attack();
-        scv1.collect();
+        // scv1.collect(); // unit 클래스에는 collect 메서드가 없음
+        ((SCV)scv1).collect(); // 다형성 : downcasting - unit -> scv
 
         System.out.println(marine1.life);
         marine1.attack();
