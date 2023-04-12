@@ -1,4 +1,4 @@
-package jy;
+package jy.project.sungjuk.model;
 public class SungJukVO {
     private String name;
     private int kor;

@@ -1,4 +1,5 @@
-package jy;
+package jy.project.bookmarket;
+
 
 public class Book {
     private String isbn;

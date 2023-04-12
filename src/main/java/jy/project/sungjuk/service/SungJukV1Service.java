@@ -1,9 +1,9 @@
-package jy;
+package jy.project.sungjuk.service;
+
+import jy.project.sungjuk.model.SungJukVO;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
-import static examples.EX10.computeSungJuk;
 
 public class SungJukV1Service {
 

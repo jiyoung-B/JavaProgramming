@@ -1,4 +1,6 @@
-package jy;
+package jy.project.bookmarket;
+
+import jy.project.MemberShip;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package jy;
+package jy.project.bookmarket;
 
 public class BookMarket {
 

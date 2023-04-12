@@ -1,4 +1,4 @@
-package jy;
+package jy.project;
 
 public class MemberShip {
     private int mno;
