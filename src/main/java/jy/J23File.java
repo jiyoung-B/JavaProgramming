@@ -41,8 +41,9 @@ public class J23File {
         String fname = "c:/Java/info.txt";
 
         // 파일쓰기(문자 출력스트림) 객체 생성
+        FileWriter fw = null;
         try {
-            FileWriter fw = new FileWriter(fname);
+            fw = new FileWriter(fname);
 
             // 파일에 내용 쓰기 : write(내용)
 
@@ -50,16 +51,24 @@ public class J23File {
             fw.write(height + "\n");
             fw.write(age + "\n");
 
-            // 파일쓰기가 끝나면 작업 종료(해줘야 기록이 남아)
-            fw.close();
         } catch (Exception ex) {
             ex.getMessage();
+        } finally {
+            // 파일쓰기가 끝나면 작업 종료(해줘야 기록이 남아)
+            if(fw!=null) {
+                try {
+                    fw.close();
+                } catch (Exception ex) {
+                    ex.getMessage();
+                }
+            }
         }
 
         // 파일에 저장된 데이터 화면에 출력1 - 문자 하나씩 읽음
         // 파일읽기(문자 입력스트림) 객체 생성
+        FileReader fr = null;
         try {
-            FileReader fr = new FileReader(fname);
+            fr = new FileReader(fname);
 
             int ch = 0;
             // 파일에서 하나의 문자를 읽어옴
@@ -68,28 +77,42 @@ public class J23File {
                 // 문자로 변환해서 출력
                 System.out.print((char)ch);
             }
-            //System.out.println("여기뭐여"+(char)fr.read()); // 97(=a 아스키코드) - Reads a single character. char 형변환 필요
-            fr.close();
-
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+        } finally {
+            if(fr != null){
+                try {
+                    fr.close();
+                } catch (Exception ex) {
+                    ex.getMessage();
+                }
+            }
+
         }
 
         // 파일에 저장된 데이터 화면에 출력2 - 한 행씩 읽음
         // BufferedReader를 이용하면 입력속도를 높일 수 있음
+        BufferedReader br = null;
         try {
-            FileReader fr = new FileReader(fname);
-        BufferedReader br = new BufferedReader(fr);
+            fr = new FileReader(fname);
+            br = new BufferedReader(fr);
 
-        while(br.ready()){ // 읽어올 데이터가 있는지 확인
-            // 만일, 있다면 한 행씩 읽어서 화면에 출력
-            System.out.println(br.readLine());
-        }
-        br.close();
-        fr.close();
+            while(br.ready()){ // 읽어올 데이터가 있는지 확인
+                // 만일, 있다면 한 행씩 읽어서 화면에 출력
+                System.out.println(br.readLine());
+            }
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+        }finally {
+            if( br != null){
+                try {
+                    br.close();
+                    fr.close();
+                } catch (Exception ex) {
+                    ex.getMessage();
+                }
+            }
         }
 
 
