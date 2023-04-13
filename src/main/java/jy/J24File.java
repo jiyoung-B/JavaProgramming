@@ -73,12 +73,11 @@ public class J24File {
         // 변수에 저장된 학생정보 출력 2
         String[] info = stdinfo.split("[ ]");
         System.out.println("학번 : " + info[0]);
-        System.out.println("학번 : " + info[1]);
-        System.out.println("이름 : " + info[2]);
-        System.out.println("주소 : " + info[3] + info[4]);
-        System.out.println("생년월일 : " + info[5]);
-        System.out.println("학과 : " + info[6]);
-        System.out.println("교수 : " + info[7]);
+        System.out.println("이름 : " + info[1]);
+        System.out.println("주소 : " + info[2] + info[3]);
+        System.out.println("생년월일 : " + info[4]);
+        System.out.println("학과 : " + info[5]);
+        System.out.println("교수 : " + info[6]);
     }
 }
 
@@ -101,7 +100,7 @@ class Student {
 
     @Override
     public String toString() {
-        String fmt = " %d %s %s %s %s %d\n";
+        String fmt = "%d %s %s %s %s %d\n";
         return String.format(fmt, hakbun, name, addr, birth, dept, prof);
     }
 }
