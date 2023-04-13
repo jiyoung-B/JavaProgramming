@@ -97,7 +97,7 @@ class Student2 implements Serializable{
 
     @Override
     public String toString() {
-        String fmt = " %d %s %s %s %s %d\n";
+        String fmt = "%d %s %s %s %s %d\n";
         return String.format(fmt, hakbun, name, addr, birth, dept, prof);
     }
 
