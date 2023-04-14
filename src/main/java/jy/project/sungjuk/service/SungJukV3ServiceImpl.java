@@ -1,5 +1,7 @@
 package jy.project.sungjuk.service;
 
+import jy.project.sungjuk.dao.SungJukV3DAO;
+import jy.project.sungjuk.dao.SungJukV3DAOImpl;
 import jy.project.sungjuk.model.SungJukVO;
 
 import java.io.BufferedReader;
@@ -15,16 +17,13 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
 
     private Scanner sc = null;
     private List<SungJukVO> sjs = null;
-    private String fname = "c:/Java/sungjukv3.dat";
+    private SungJukV3DAO sjdao = null;
 
-    private FileWriter fw = null;
-    private FileReader fr = null;
-    private BufferedWriter bw = null;
-    private BufferedReader br = null;
 
     public SungJukV3ServiceImpl() {
         sc = new Scanner(System.in);
         sjs = new ArrayList<>(); // sjs 배열 초기화
+        sjdao = new SungJukV3DAOImpl();
     }
 
     // 성적 프로그램 메뉴
@@ -166,6 +165,9 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
         //return sjs;
     }
 
+
+
+
     public void newSungJuk() {
 
         String name = "";
@@ -188,36 +190,39 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
 
         SungJukVO sj = new SungJukVO(name, kor, eng, mat);
         computeSungJuk(sj);  // 성적 처리
-        sjs.add(sj);        // 처리된 성적데이터 list에 저장
+        // sjs.add(sj);        // 처리된 성적데이터 list에 저장
 
 
-    // 생성된 성적 데이터를 파일에 저장
-        try {
-        // 파일기록시 추가append 기능 활성화
-        fw = new FileWriter(fname, true);
-        bw = new BufferedWriter(fw);
+        if (sjdao.saveSungJuk(sj))
+            System.out.println("\n저장 성공!!\n");
 
-        bw.write(sj.toString());
-    } catch (Exception ex) {
-        System.out.println("성적 데이터 저장중 오류발생!!");
-        System.out.println(ex.getMessage());
-    } finally {
-        if (bw != null) try { bw.close(); } catch (Exception ex) { }
-        if (fw != null) try { fw.close(); } catch (Exception ex) { }
+
     }
 
-}
+
+
 
 
     public void computeSungJuk(SungJukVO sj) {
-        sj.setTot( sj.getKor() + sj.getEng() + sj.getMat() );
-        sj.setAvg( (double) sj.getTot() / 3 );
-        switch ((int)(sj.getAvg()/10)) {
-            case 10: case 9: sj.setGrd('수'); break;
-            case 8: sj.setGrd('우'); break;
-            case 7: sj.setGrd('미'); break;
-            case 6: sj.setGrd('양'); break;
-            default: sj.setGrd('가'); break;
+        sj.setTot(sj.getKor() + sj.getEng() + sj.getMat());
+        sj.setAvg((double) sj.getTot() / 3);
+        switch ((int) (sj.getAvg() / 10)) {
+            case 10:
+            case 9:
+                sj.setGrd('수');
+                break;
+            case 8:
+                sj.setGrd('우');
+                break;
+            case 7:
+                sj.setGrd('미');
+                break;
+            case 6:
+                sj.setGrd('양');
+                break;
+            default:
+                sj.setGrd('가');
+                break;
         }
     }
 
