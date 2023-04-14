@@ -76,6 +76,8 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
                 removeSungJuk();
                 break;
             case 0:
+                // ArrayList에 저장된 모든 성적데이터를 파일에 기록 후 종료하도록..!
+                sjdao.writeSungJuk(sjs);
                 System.exit(0);
                 break;
             default:
@@ -195,9 +197,12 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
         computeSungJuk(sj);  // 성적 처리
         // sjs.add(sj);        // 처리된 성적데이터 list에 저장
 
-
+        // 성적데이터 파일에 저장
         if (sjdao.saveSungJuk(sj))
             System.out.println("\n저장 성공!!\n");
+
+        // 방금 추가된 성적 데이터를 sjs에도 반영
+        sjs.add(sj);
 
 
     }
