@@ -46,7 +46,7 @@ public class J27JDBC {
             System.out.println("데이터 입력 확인 : " + cnt); // insert가 되었으면, insert가 반영된 행 return
 
         } catch (SQLException e) {
-            System.out.println("DB 접속주소나 아이디/비번을 확인하세요!!");
+            System.out.println("DB 접속주소나 아이디/비번, SQL문을 확인하세요!!");
         } finally {
             if(pstmt != null) try {pstmt.close();} catch (Exception ex){}
             if(conn != null) try {conn.close();} catch (Exception ex){}

@@ -1,7 +1,9 @@
 package jy;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class J28JDBC {
@@ -12,6 +14,7 @@ public class J28JDBC {
     private static String selectBookSQL = " select * from newbooks order by bookno desc ";
     public static void main(String[] args) {
         // newbooks 테이블의 모든 레코드 조회
+        List<Book> bookdata = new ArrayList<>();
 
         // 1. JDBC 드라이버를 메모리에 적재
         try {
@@ -31,17 +34,22 @@ public class J28JDBC {
             // SQL문 실행후 결과집합(result set) 받음
             rs = pstmt.executeQuery();// DML 실행시 사용(select)
             while (rs.next()) {
-                System.out.print(rs.getInt("bookno") + " ");
-                System.out.print(rs.getString("title") + " ");
-                System.out.print(rs.getString("writer") + "\n");
+                Book book = new Book(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getInt(4), rs.getString(5));
+                bookdata.add(book);
             }
 
         } catch (SQLException e) {
-            System.out.println("DB 접속주소나 아이디/비번을 확인하세요!!");
+            System.out.println("DB 접속주소나 아이디/비번, SQL문을 확인하세요!!");
         } finally {
             if(rs != null) try {rs.close();} catch (Exception ex){}
             if(pstmt != null) try {pstmt.close();} catch (Exception ex){}
             if(conn != null) try {conn.close();} catch (Exception ex){}
+        }
+
+        // 도서정보 출력
+        for (Book b : bookdata) {
+            System.out.println(b);
         }
 
 
@@ -73,7 +81,7 @@ class Book {
     @Override
     public String toString() {
         String fmt = "%d %s %s %d %s";
-        return String.format(fmt, bookno, writer, price, regdate);
+        return String.format(fmt, bookno, title, writer, price, regdate);
     }
 
 }
