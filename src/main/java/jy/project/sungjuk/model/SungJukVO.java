@@ -18,6 +18,13 @@ public class SungJukVO {
         this.mat = mat;
     }
 
+    public SungJukVO(String name, int kor, int eng, int mat, int tot, double avg, char grd) {
+        this(name, kor, eng, mat); // 클래스 내 매개변수가 4개짜리인 생성자를 부름
+        this.tot = tot;
+        this.avg = avg;
+        this.grd = grd;
+    }
+
     public String getName() {
         return name;
     }
