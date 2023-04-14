@@ -10,7 +10,7 @@ public class J25File {
     // 학생 객체 생성
     Student2 std01 = new Student2(201350050, "김태희", "경기도 고양시", "1985.3.22", "컴퓨터", 504);
 
-    // 직렬화 마샬링
+    // 직렬화 마샬링marshalling
         String fname = "c:/Java/student.obj";
     //ObjectOutputStream baos = null;
         FileOutputStream fos = null;         // 파일저장용
