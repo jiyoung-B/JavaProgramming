@@ -50,14 +50,20 @@ public class J33JDBC {
           }
 
         // 사원 상세조회
-        System.out.print("조회할 사원번호 empno? ");
+        /*  System.out.print("조회할 사원번호 empno? ");
         int empno = sc.nextInt();
 
         EMPVO emp = EMPDAOImpl.selectOneEmp(empno);
-        if (emp!= null) System.out.println(emp);
+        if (emp!= null) System.out.println(emp);*/
 
         // 사원 수정
         // 사원 삭제
+        System.out.print("삭제할 사원번호 empno? ");
+        int empno = sc.nextInt();
+
+        int cnt = EMPDAOImpl.deleteEmp(empno);
+        if(cnt > 0) System.out.println(cnt + "건 삭제 성공");
+
         //EMPDAO empDAO = new EMPDAO();
 //        EMPVO emp = new EMPVO(500, "Baek", "Jiyoung", "KELLY", "010.222.2222", "2023-04-17", "DV_MASTER", 75000, 30, 500, 222);
 
@@ -212,10 +218,10 @@ interface EMPDAO {
     // static, preparedstatement 주의하기
     // 5개 작성하기
 class EMPDAOImpl {
-
+    private static String insertEmpSQL = " insert into employees values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     private static String selectEMPSQL = " select EMPLOYEE_ID, FIRST_NAME, EMAIL, JOB_ID, DEPARTMENT_ID from employees order by employee_id";
     private static String selectOneEMPSQL = " select * from employees where EMPLOYEE_ID = ? ";
-    private static String insertEmpSQL = " insert into employees values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static String deleteEMPSQL = " delete from employees where EMPLOYEE_ID = ? ";
 
 
     public static int insertEmp(EMPVO emp){
@@ -345,17 +351,22 @@ class EMPDAOImpl {
     public static int deleteEmp(int empno){
         Connection conn = null;
         PreparedStatement pstmt = null;
+        int cnt = 0;
 
         try {
+            conn = J34JDBCUtil.makeConn();
+            pstmt = conn.prepareStatement(deleteEMPSQL);
+            pstmt.setInt(1, empno);
+            cnt = pstmt.executeUpdate();
 
         } catch (Exception ex) {
             System.out.println("deleteEmp 에서 오류발생!!");
             System.out.println(ex.getMessage());
         }
         finally {
-
+            J34JDBCUtil.closeConn(null, pstmt, conn);
         }
-        return 0;
+        return cnt;
     }
 
 }
