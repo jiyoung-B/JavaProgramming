@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class J27JDBC {
-    private static String DRV ="org.mariadb.jdbc.Driver";
-    private static String URL = "jdbc:mariadb://fullstacks.czvo3mok5lfm.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";
-    private static String USR = "admin";
-    private static String PWD = "fullstack_2023";
+//    private static String DRV ="org.mariadb.jdbc.Driver";
+//    private static String URL = "jdbc:mariadb://fullstacks.czvo3mok5lfm.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";
+//    private static String USR = "admin";
+//    private static String PWD = "fullstack_2023";
     private static String insertBookSQL = " insert into newbooks (title, writer, price) values (?, ?, ?) ";
     public static void main(String[] args) {
         // newbooks 테이블에 도서정보 저장
@@ -23,18 +23,19 @@ public class J27JDBC {
         int price = sc.nextInt();
 
         // 1. JDBC 드라이버를 메모리에 적재
-        try {
-            Class.forName(DRV); // 인터페이스 jdbc 메모리에 적재시켜서 관련 라이브러리를 쓸 수 있도록함. 반드시 있어야 돼.
-            //  private static String DRV ="org.mariadb.jdbc.Driver"; static으로 변경
-        } catch (ClassNotFoundException e) {
-            System.out.println("mariacb용 JDBC 드라이버가 없어요!!");
-        }
+//        try {
+//            Class.forName(DRV); // 인터페이스 jdbc 메모리에 적재시켜서 관련 라이브러리를 쓸 수 있도록함. 반드시 있어야 돼.
+//            //  private static String DRV ="org.mariadb.jdbc.Driver"; static으로 변경
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("mariacb용 JDBC 드라이버가 없어요!!");
+//        }
         Connection conn = null;
         PreparedStatement pstmt = null;
 
         try {
             // 데이터베이스 접속
-            conn = DriverManager.getConnection(URL, USR, PWD);
+//            conn = DriverManager.getConnection(URL, USR, PWD);
+            conn = J32JDBCUtil.makeConn();
             // 실행할 SQL문 생성
             pstmt = conn.prepareStatement(insertBookSQL);
             // 실행할 SQL문의 placeholder(sql문의 ?물음표)에 값 전달
@@ -48,8 +49,9 @@ public class J27JDBC {
         } catch (SQLException e) {
             System.out.println("DB 접속주소나 아이디/비번, SQL문을 확인하세요!!");
         } finally {
-            if(pstmt != null) try {pstmt.close();} catch (Exception ex){}
-            if(conn != null) try {conn.close();} catch (Exception ex){}
+            J32JDBCUtil.closeConn(null, pstmt, conn);
+//            if(pstmt != null) try {pstmt.close();} catch (Exception ex){}
+//            if(conn != null) try {conn.close();} catch (Exception ex){}
         }
 
 
