@@ -17,7 +17,6 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
     public SungJukV4ServiceImpl() {
         sc = new Scanner(System.in);
         sjdao = new SungJukV4DAOImpl();
-
     }
     // 성적 프로그램 메뉴
     public int displayMenu() {
@@ -144,16 +143,18 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
 
 
     }
+
+    // 성적 리스트 조회( 이름, 국어, 영어, 수학)
     public void readSungJuk() {
-        String fmt = "%s %d %d %d\n";
+        //List<SungJukVO> sj = sjdao.selectSungJuk();
+
+        String fmt = "\n %d %s %d %d %d\n";
 
         try {
-            for (SungJukVO sj : sjs) {
-                // if(sj != null)
-                System.out.printf(fmt, sj.getName(), sj.getKor(), sj.getEng(), sj.getMat());
+            for (SungJukVO sj : sjdao.selectSungJuk()) {
+                System.out.printf(fmt, sj.getSjno(), sj.getName(), sj.getKor(), sj.getEng(), sj.getMat());
             } // sjs 배열에 저장된 모든 성적데이터 출력
         } catch (NullPointerException ex) {
-            //System.out.println("조회할 정보가 없습니다!");
         }
         //return sjs;
     }

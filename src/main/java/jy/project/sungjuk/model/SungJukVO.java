@@ -1,5 +1,6 @@
 package jy.project.sungjuk.model;
 public class SungJukVO {
+    private int sjno;
     private String name;
     private int kor;
     private int eng;
@@ -7,6 +8,9 @@ public class SungJukVO {
     private int tot;
     private double avg;
     private char grd;
+    private String regdate;
+
+
 
     public SungJukVO() {
     }
@@ -80,6 +84,10 @@ public class SungJukVO {
     public void setGrd(char grd) {
         this.grd = grd;
     }
+    public int getSjno() {return sjno;}
+    public void setSjno(int sjno) {this.sjno = sjno;}
+    public String getRegdate() {return regdate;}
+    public void setRegdate(String regdate) {this.regdate = regdate;}
 
     @Override
     public String toString() {

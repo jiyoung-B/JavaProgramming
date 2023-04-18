@@ -2,11 +2,14 @@ package jy.project.sungjuk.dao;
 
 import jy.J34JDBCUtil;
 import jy.project.sungjuk.model.SungJukVO;
+import sun.security.provider.Sun;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SungJukV4DAOImpl implements SungJukV4DAO{
@@ -49,11 +52,37 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
 
     @Override
     public List<SungJukVO> selectSungJuk() {
-        return null;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<SungJukVO> sjdata = new ArrayList<>();
+
+        try {
+            conn = MariaDB.makeConn();
+            pstmt = conn.prepareStatement(selectSQL);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                SungJukVO sj = new SungJukVO(
+                        rs.getString(2), rs.getInt(3),
+                        rs.getInt(4), rs.getInt(5));
+                sj.setSjno(rs.getInt(1));
+                sjdata.add(sj);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("selectSungJuk에서 오류 발생!!");
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        } finally {
+            MariaDB.closeConn(rs, pstmt, conn);
+        }
+        return sjdata;
     }
 
     @Override
     public SungJukVO selectOneSungJuk(int sjno) {
+
         return null;
     }
 
