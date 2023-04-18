@@ -117,22 +117,12 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
 
     }
     public void removeSungJuk() {
-        // 이름입력 -> 대상검색 -> 대상출력
-        System.out.println("삭제할 학생이름?");
-        String name = sc.next();
+        // 번호입력 -> 대상검색 -> 대상출력
+        System.out.println("삭제할 학생번호?");
+        int sjno = sc.nextInt();
 
-
-        for (SungJukVO sj : sjs) {
-            if (sj.getName().equals(name)) {
-                sjs.remove(sj); // 대상을 list에서 삭제
-                System.out.println("\n삭제되었습니다!\n");
-                System.out.println(sjs.get(sjs.size() - 1));
-                break;
-            }
-        }
-
-
-
+        if(sjdao.deleteSungJuk(sjno) > 0 )
+            System.out.println("성적데이터 삭제 완료!!");
     }
 
     // 성적 리스트 조회( 이름, 국어, 영어, 수학)

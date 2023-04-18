@@ -121,6 +121,24 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
 
     @Override
     public int deleteSungJuk(int sjno) {
-        return 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int cnt = -1;
+
+        try {
+            conn = MariaDB.makeConn();
+            pstmt = conn.prepareStatement(insertSQL);
+            pstmt.setInt(1, sjno);
+
+            cnt = pstmt.executeUpdate();
+            System.out.println("데이터 삭제 확인 : " + cnt);
+        } catch (SQLException ex) {
+            System.out.println("deleteSungJuk 오류발생!!");
+            ex.printStackTrace();
+        }
+        finally {
+            MariaDB.closeConn(null, pstmt, conn);
+        }
+        return cnt;
     }
 }
