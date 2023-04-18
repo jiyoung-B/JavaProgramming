@@ -82,8 +82,36 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
 
     @Override
     public SungJukVO selectOneSungJuk(int sjno) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        SungJukVO sj = null;
 
-        return null;
+        try {
+            conn = MariaDB.makeConn();
+            pstmt = conn.prepareStatement(selectOneSQL);
+            pstmt.setInt(1, sjno);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()){
+                sj = new SungJukVO(rs.getString(2),
+                        rs.getInt(3), rs.getInt(4),
+                        rs.getInt(5), rs.getInt(6),
+                        rs.getDouble(7), rs.getString(8).charAt(0));
+                sj.setSjno(rs.getInt(1));
+                sj.setRegdate(rs.getString(9));
+            }
+
+        } catch (Exception ex) {
+            System.out.println("selectOneSungJuk 오류 발생!!");
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        } finally {
+            MariaDB.closeConn(rs, pstmt, conn);
+        }
+
+        return sj;
     }
 
     @Override
