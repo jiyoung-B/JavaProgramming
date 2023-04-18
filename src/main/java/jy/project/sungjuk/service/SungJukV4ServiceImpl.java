@@ -85,36 +85,29 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
         }
     }
     public void modifySungJuk() {
-        // 이름입력 -> 대상검색 -> 새로운데이터입력 -> 성적처리
-        System.out.print("수정할 학생이름은?");
-        String name = sc.next();
+        // 번호입력 -> 대상검색 -> 새로운데이터입력 -> 성적처리
+        SungJukVO sj = null;
+        try {
+            System.out.print("수정할 학생번호?");
+            int sjno = sc.nextInt();
+            System.out.print("국어는? ");
+            int kor = sc.nextInt();
+            System.out.print("영어은? ");
+            int eng = sc.nextInt();
+            System.out.print("수학은? ");
+            int mat = sc.nextInt();
 
-        for (int i = 0; i < sjs.size(); i++) {
-            try {
-                if (sjs.get(i).getName().equals(name)) {
-                    System.out.print("국어는? ");
-                    int kor = sc.nextInt();
-                    System.out.print("영어은? ");
-                    int eng = sc.nextInt();
-                    System.out.print("수학은? ");
-                    int mat = sc.nextInt();
-
-                    SungJukVO newOne = new SungJukVO(name, kor, eng, mat);
-                    computeSungJuk(newOne);
-                    sjs.set(i, newOne); // 기존 성적데이터 위치에 새롭게 생성한 객체 대입
-                    System.out.println("\n수정완료!!\n");
-                    System.out.println(sjs);
-                    break;
-                }
-            } catch (InputMismatchException ex) {
-                System.out.println("\n잘못 입력하셨습니다... 다시 시도하세요!\n");
-                sc.nextLine();
-                return;
-            }
+            sj =  new SungJukVO(null, kor, eng, mat);
+            sj.setSjno(sjno);
+        } catch (InputMismatchException ex) {
+            System.out.println("\n잘못 입력하셨습니다... 다시 시도하세요!\n");
+            sc.nextLine();
+            return;
         }
 
-
-
+        computeSungJuk(sj);
+        if( sjdao.updateSungJuk(sj)> 0)
+        System.out.println("\n수정완료!!\n");
     }
     public void removeSungJuk() {
         // 번호입력 -> 대상검색 -> 대상출력
@@ -133,7 +126,9 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
 
         try {
             for (SungJukVO sj : sjdao.selectSungJuk()) {
-                System.out.printf(fmt, sj.getSjno(), sj.getName(), sj.getKor(), sj.getEng(), sj.getMat());
+                System.out.printf(fmt, sj.getSjno(),
+                        sj.getName(), sj.getKor(),
+                        sj.getEng(), sj.getMat());
             } // sjs 배열에 저장된 모든 성적데이터 출력
         } catch (NullPointerException ex) {
         }
@@ -179,21 +174,11 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
         sj.setAvg((double) sj.getTot() / 3);
         switch ((int) (sj.getAvg() / 10)) {
             case 10:
-            case 9:
-                sj.setGrd('수');
-                break;
-            case 8:
-                sj.setGrd('우');
-                break;
-            case 7:
-                sj.setGrd('미');
-                break;
-            case 6:
-                sj.setGrd('양');
-                break;
-            default:
-                sj.setGrd('가');
-                break;
+            case 9: sj.setGrd('수');break;
+            case 8: sj.setGrd('우');break;
+            case 7: sj.setGrd('미');break;
+            case 6: sj.setGrd('양');break;
+            default: sj.setGrd('가');break;
         }
     }
 
